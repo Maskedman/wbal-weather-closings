@@ -1,3 +1,7 @@
+# Baltimore Area weather closings
+See branch wbal for Baltimore specific configuration, this master branch is a clone/fork of https://github.com/ChristopherKing42/Pennsylvania-Weather-Closings
+
+
 # Pennsylvania-Weather-Closings
 Have you ever had a project where you needed to know if your school or business is closed or delayed? Your problem is solved!
 
