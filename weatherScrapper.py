@@ -1,3 +1,14 @@
+## Original Copyright Below in the next section...
+##
+## Script Modified to scrape wbal in Baltimore for Baltimore area Closings
+##
+## Modified by David J Rancourt Jr.
+##
+## License remails GPL as outlined below
+##
+##
+## #################### ORIGINAL COPYRIGHT HOLDER ###############################
+##
 ##Copyright 2015 Christopher King
 ##This file is part of Pennslyvania Weather Closings.
 ##
@@ -20,7 +31,7 @@ import argparse
 import sys
 
 javascript = re.compile(r"ibsys.htvClosings.init\(({.*?})\)") #The closings are embeded in a javascript function. This will extract the dictionary to group 1.
-wgalAddress = "http://www.wgal.com/weather/closings"
+wbalAddress = "http://www.wbal.com/weather/closings"
 def closings(useCache=True, cache="closings.html", verbose=False):
     """Returns a dictionary containing information about closed schools and bussinesses.
     Keyword Arguments:
@@ -33,16 +44,16 @@ def closings(useCache=True, cache="closings.html", verbose=False):
             print >> sys.stderr, "DEBUG - reading HTML from %s, not Interweb" % cache
         try:
             with open(cache, 'r') as cacheFile:
-                wgalSite = cacheFile.read()
+                wbalSite = cacheFile.read()
         except IOError:
             return closings(useCache=False, cache=cache)
     else:
-        wgalSite = urlopen(wgalAddress).read()
+        wbalSite = urlopen(wbalAddress).read()
         if cache:
             with open(cache, 'w') as cacheFile:
-                cacheFile.write(wgalSite)
+                cacheFile.write(wbalSite)
 
-    rawData = eval(re.search(javascript, wgalSite).group(1)) #The parsed data is a valid python dictionary
+    rawData = eval(re.search(javascript, wbalSite).group(1)) #The parsed data is a valid python dictionary
     organizedDict = {place.pop('name'): place for place in #Change the name into the key
                      chain(*(letter['institutions'] for letter in rawData.values() if type(letter) == dict))} #The raw data is organized by letter. Extract "institutions" from each and chain them together.
     return organizedDict
