@@ -31,7 +31,7 @@ import argparse
 import sys
 
 javascript = re.compile(r"ibsys.htvClosings.init\(({.*?})\)") #The closings are embeded in a javascript function. This will extract the dictionary to group 1.
-wbalAddress = "http://www.wbal.com/weather/closings"
+wbalAddress = "http://www.wbaltv.com/weather/closings"
 def closings(useCache=True, cache="closings.html", verbose=False):
     """Returns a dictionary containing information about closed schools and bussinesses.
     Keyword Arguments:
