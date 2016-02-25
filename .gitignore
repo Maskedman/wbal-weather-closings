@@ -61,3 +61,6 @@ closings.html
 
 ##PyCharm IDE
 .idea/
+
+## OS-X Specific
+.DS_Store
